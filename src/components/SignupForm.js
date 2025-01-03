@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Container } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { signupUser } from '../api-helper'; // Import the signupUser function
 
 function SignupForm() {
   const [firstName, setFirstName] = useState('');
@@ -9,7 +10,7 @@ function SignupForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     // Check if password and confirm password match
@@ -18,9 +19,25 @@ function SignupForm() {
       return;
     }
 
-    // Handle signup logic here
-    console.log('Signing up with:', firstName, lastName, email, password);
-  };
+     // Prepare data for signup
+     const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+      };
+  
+      // Call the signupUser function from api-helper.js
+      const { result, status } = await signupUser(userData);
+  
+      if (status) {
+        alert(result.message || 'Signup successful!');
+        // Redirect to login or home page, or handle the successful signup
+      } else {
+        alert(result);
+      }
+    };
 
   return (
     <Container maxWidth="xs">
