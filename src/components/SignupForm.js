@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Container } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signupUser } from '../api-helper'; // Import the signupUser function
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function SignupForm() {
   const [firstName, setFirstName] = useState('');
@@ -9,6 +10,9 @@ function SignupForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const navigate = useNavigate(); // Create navigate instance
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -27,13 +31,21 @@ function SignupForm() {
         password,
         confirmPassword,
       };
+      
   
       // Call the signupUser function from api-helper.js
       const { result, status } = await signupUser(userData);
   
       if (status) {
-        alert(result.message || 'Signup successful!');
-        // Redirect to login or home page, or handle the successful signup
+        console.log('Signup Successful:', result); // Log full response to console
+      alert(result.message || 'Signup successful!');
+      // Example: Log specific user details
+      console.log('User Details:', result.user);
+      // You can also redirect or perform other actions here
+
+      // Navigate to the login page after successful signup
+      navigate('/login');
+      
       } else {
         alert(result);
       }
