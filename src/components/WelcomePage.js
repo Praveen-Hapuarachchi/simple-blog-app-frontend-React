@@ -1,10 +1,14 @@
 // WelcomePage.js
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Plus, List, LogOut, Sparkles } from 'lucide-react';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
 
 const WelcomePage = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const handleLogout = () => {
     console.log('Logging out...');
   };
@@ -16,6 +20,16 @@ const WelcomePage = () => {
   const handleViewPosts = () => {
     console.log('Navigating to view posts...');
   };
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
@@ -31,8 +45,10 @@ const WelcomePage = () => {
         <CardContent className="grid gap-4">
           <Button 
             variant="primary"
-            className="w-full h-14 text-lg bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white"
+            className="w-full h-14 text-lg"
             onClick={handleCreatePost}
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
           >
             <Plus className="h-6 w-6 mr-2" />
             Create New Post
@@ -40,8 +56,10 @@ const WelcomePage = () => {
           
           <Button 
             variant="success"
-            className="w-full h-14 text-lg bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white"
+            className="w-full h-14 text-lg"
             onClick={handleViewPosts}
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
           >
             <List className="h-6 w-6 mr-2" />
             View All Posts
@@ -49,14 +67,36 @@ const WelcomePage = () => {
           
           <Button 
             variant="danger"
-            className="w-full h-14 text-lg bg-gradient-to-r from-red-400 to-yellow-500 hover:from-red-500 hover:to-yellow-600 text-white"
+            className="w-full h-14 text-lg"
             onClick={handleLogout}
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
           >
             <LogOut className="h-6 w-6 mr-2" />
             Logout
           </Button>
         </CardContent>
       </Card>
+      <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography sx={{ p: 1 }}>Popover content</Typography>
+      </Popover>
     </div>
   );
 };

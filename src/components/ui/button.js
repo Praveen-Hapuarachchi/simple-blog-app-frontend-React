@@ -9,8 +9,8 @@ const Button = ({ children, className, onClick, variant = 'default', ...props })
     {
       'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl': variant === 'default',
       'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl': variant === 'primary',
-      'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl': variant === 'success',
-      'bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl': variant === 'danger',
+      'bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white shadow-lg hover:shadow-xl': variant === 'success',
+      'bg-gradient-to-r from-red-400 to-yellow-500 hover:from-red-500 hover:to-yellow-600 text-white shadow-lg hover:shadow-xl': variant === 'danger',
       'border-2 border-transparent bg-white hover:border-indigo-500 hover:text-indigo-600 shadow-md hover:shadow-lg': variant === 'outline',
     },
     className
