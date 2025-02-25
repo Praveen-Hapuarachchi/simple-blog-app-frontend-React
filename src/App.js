@@ -7,6 +7,7 @@ import Login from './components/LoginForm';
 import SignUp from './components/SignupForm';
 import WelcomePage from './components/WelcomePage'; // Import the new WelcomePage component
 import Profile from './components/Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
